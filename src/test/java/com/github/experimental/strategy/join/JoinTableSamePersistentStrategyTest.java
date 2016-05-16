@@ -2,6 +2,8 @@ package com.github.experimental.strategy.join;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -12,10 +14,12 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.github.experimental.strategy.StrategyTestUtils;
 import com.github.fluent.hibernate.H;
+import com.github.fluent.hibernate.cfg.Fluent;
+import com.github.fluent.hibernate.cfg.HibernateProperties;
 import com.github.fluent.hibernate.cfg.strategy.StrategyOptions;
-import com.github.fluent.hibernate.factory.HibernateSessionFactory;
-import com.google.common.collect.Lists;
+import com.github.fluent.hibernate.cfg.strategy.hibernate5.Hibernate5NamingStrategy;
 
 /**
  *
@@ -44,34 +48,26 @@ public class JoinTableSamePersistentStrategyTest {
                 new ImplicitNamingStrategyLegacyJpaImpl(), PERISTENTS);
          */
 
-        HibernateSessionFactory.Builder.configureWithoutHibernateCfgXml()
+        Fluent.factory().dontUseHibernateCfgXml()
+                .hibernateProperties(HibernateProperties.forH2CreateDrop().showSql(true))
                 .useNamingStrategy(new ImplicitNamingStrategyLegacyJpaImpl())
-                .annotatedClasses(PERISTENTS).createSessionFactory();
+                .annotatedClasses(PERISTENTS).build();
 
         Author author = new Author();
 
-        author.setOwnBooks(Lists.<Book> newArrayList());
+        author.setOwnBooks(new ArrayList<Book>());
 
         author.getOwnBooks().add(H.save(new Book()));
 
         H.save(author);
-        /*
-        HibernateSessionFactory.doInTransaction(new IRequest<Object[]>() {
-            @Override
-            public Object[] doInTransaction(Session session) {
-                Query query = session.createSQLQuery(
-                        "select * from  JoinTableSamePersistentStrategyTest$Author_JoinTableSamePersistentStrategyTest$Book");
-                List<Object[]> list = query.list();
-                System.out.println(list);
-                for (Object[] join : list) {
-                    System.out.println(Arrays.asList(join));
-                }
-                return null;
-            }
-        });
-        */
 
-        HibernateSessionFactory.closeSessionFactory();
+        Fluent.factory().close();
+
+        /*
+         * CollectionJoinTableNamingTest
+         * https://hibernate.atlassian.net/browse/HHH-9908
+         */
+
     }
 
     // @Test

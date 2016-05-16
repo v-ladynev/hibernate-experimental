@@ -1,4 +1,4 @@
-package com.github.experimental.strategy.join;
+package com.github.experimental.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
