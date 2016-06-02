@@ -10,6 +10,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.github.experimental.persistent.user.Department;
+import com.github.experimental.persistent.user.User;
 import com.github.fluent.hibernate.H;
 import com.github.fluent.hibernate.IRequest;
 import com.github.fluent.hibernate.cfg.Fluent;
@@ -25,7 +27,8 @@ public class TransformTest {
         Fluent.factory().dontUseHibernateCfgXml()
                 .hibernateProperties(
                         HibernateProperties.forH2CreateDrop().showSql(true).formatSql(true))
-                .useNamingStrategy().scanPackages("com.github.experimental.transform").build();
+                .useNamingStrategy().scanPackages("com.github.experimental.persistent.user")
+                .build();
         createTestData();
     }
 

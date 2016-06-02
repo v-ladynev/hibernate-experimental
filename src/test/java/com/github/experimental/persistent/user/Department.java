@@ -1,4 +1,4 @@
-package com.github.experimental.transform;
+package com.github.experimental.persistent.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
