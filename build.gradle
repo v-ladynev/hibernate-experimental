@@ -12,7 +12,14 @@ repositories {
 
 dependencies {
     compile 'org.hibernate:hibernate-core:5.1.0.Final'
-    compile 'com.github.v-ladynev:fluent-hibernate-core:0.2.0'
+
+    //compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.6.Final'
+
+    compile('com.github.v-ladynev:fluent-hibernate-core:0.2.0') {
+        exclude group: 'org.hibernate'
+    }
+
+    compile files('libs/ojdbc6_11.2.0.4.jar')
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:1.7.1'

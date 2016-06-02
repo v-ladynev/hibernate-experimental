@@ -48,10 +48,17 @@ public class JoinTableSamePersistentStrategyTest {
                 new ImplicitNamingStrategyLegacyJpaImpl(), PERISTENTS);
          */
 
+        /*
         Fluent.factory().dontUseHibernateCfgXml()
                 .hibernateProperties(HibernateProperties.forH2CreateDrop().showSql(true))
                 .useNamingStrategy(new ImplicitNamingStrategyLegacyJpaImpl())
                 .annotatedClasses(PERISTENTS).build();
+        */
+
+        Fluent.factory().dontUseHibernateCfgXml()
+                .hibernateProperties(HibernateProperties.forH2CreateDrop().showSql(true))
+                .useNamingStrategy(new ImplicitNamingStrategyLegacyJpaImpl())
+                .scanPackages("com.github.experimental.strategy.join").build();
 
         Author author = new Author();
 
