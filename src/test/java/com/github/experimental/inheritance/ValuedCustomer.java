@@ -1,13 +1,11 @@
 package com.github.experimental.inheritance;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@DiscriminatorValue(value = "valuedCustomer")
-@PrimaryKeyJoinColumn
+@PrimaryKeyJoinColumn(name = "xxxYY")
 public class ValuedCustomer extends Customer {
 
     @Column
@@ -23,7 +21,7 @@ public class ValuedCustomer extends Customer {
 
     @Override
     public String toString() {
-        return "pid = " + getPid() + " customerName = " + getCustomerName()
+        return "customerPid = " + getCustomerPid() + " customerName = " + getCustomerName()
                 + " valuedCustomerName = " + valuedCustomerName;
     }
 

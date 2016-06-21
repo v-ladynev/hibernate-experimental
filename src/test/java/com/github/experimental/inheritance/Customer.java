@@ -1,7 +1,7 @@
 package com.github.experimental.inheritance;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,26 +10,26 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorValue(value = "customer")
+@DiscriminatorColumn(name = "someDiscriminator")
 public class Customer {
 
     @Id
     @GeneratedValue
-    private Long pid;
+    private Long customerPid;
 
     @Column
     private String customerName;
 
-    public Long getPid() {
-        return pid;
+    public Long getCustomerPid() {
+        return customerPid;
     }
 
     public String getCustomerName() {
         return customerName;
     }
 
-    public void setPid(Long pid) {
-        this.pid = pid;
+    public void setCustomerPid(Long customerPid) {
+        this.customerPid = customerPid;
     }
 
     public void setCustomerName(String customerName) {
@@ -38,7 +38,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "pid = " + pid + " customerName = " + customerName;
+        return "pid = " + customerPid + " customerName = " + customerName;
     }
 
 }
