@@ -92,10 +92,10 @@ public class JoinTableSamePersistentStrategyTest {
         assertThat(coauthorBooks.getName()).isIn("table_authors_books",
                 "table_authors_books_coauthor_books");
 
-        assertThat(StrategyTestUtils.getColumNames(books.getColumnIterator()))
-                .containsOnly("fk_author", "fk_own_books");
-        assertThat(StrategyTestUtils.getColumNames(coauthorBooks.getColumnIterator()))
-                .containsOnly("fk_author", "fk_coauthor_books");
+        assertThat(StrategyTestUtils.getColumNames(books)).containsOnly("fk_author",
+                "fk_own_books");
+        assertThat(StrategyTestUtils.getColumNames(coauthorBooks)).containsOnly("fk_author",
+                "fk_coauthor_books");
     }
 
     // @Test
@@ -109,10 +109,10 @@ public class JoinTableSamePersistentStrategyTest {
         assertThat(books.getName()).isIn("authors_books", "authors_books_own_books");
         assertThat(coauthorBooks.getName()).isIn("authors_books", "authors_books_coauthor_books");
 
-        assertThat(StrategyTestUtils.getColumNames(books.getColumnIterator()))
-                .containsOnly("fk_author", "fk_own_books");
-        assertThat(StrategyTestUtils.getColumNames(coauthorBooks.getColumnIterator()))
-                .containsOnly("fk_author", "fk_coauthor_books");
+        assertThat(StrategyTestUtils.getColumNames(books)).containsOnly("fk_author",
+                "fk_own_books");
+        assertThat(StrategyTestUtils.getColumNames(coauthorBooks)).containsOnly("fk_author",
+                "fk_coauthor_books");
     }
 
     // @Test

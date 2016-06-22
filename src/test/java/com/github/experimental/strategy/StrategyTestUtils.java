@@ -11,9 +11,11 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataBuilder;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.model.naming.ImplicitNamingStrategy;
+import org.hibernate.mapping.Collection;
 import org.hibernate.mapping.Column;
 import org.hibernate.mapping.Component;
 import org.hibernate.mapping.ForeignKey;
+import org.hibernate.mapping.Index;
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Property;
 import org.hibernate.mapping.Table;
@@ -34,17 +36,50 @@ public final class StrategyTestUtils {
 
     }
 
-    public static List<String> getComponentColumnNames(PersistentClass persistentClass,
-            String propertyName) {
+    public static Table getTable(Metadata metadata, Class<?> persistent) {
+        PersistentClass result = metadata.getEntityBinding(persistent.getName());
+        assertThat(result).isNotNull();
+        return result.getTable();
+    }
 
-        Property componentBinding = persistentClass.getProperty(propertyName);
+    public static Table getCollectionTable(Metadata metadata, Class<?> persistent,
+            String propertyName) {
+        Collection result = metadata
+                .getCollectionBinding(persistent.getName() + "." + propertyName);
+        assertThat(result).isNotNull();
+        return result.getCollectionTable();
+    }
+
+    public static String getColumnName(Metadata metadata, Class<?> persistent,
+            String propertyName) {
+        PersistentClass binding = metadata.getEntityBinding(persistent.getName());
+        assertThat(binding).isNotNull();
+        Column result = getColumn(binding, propertyName);
+        assertThat(result).isNotNull();
+        return result.getName();
+    }
+
+    public static Column getColumn(PersistentClass persistentClass, String propertyName) {
+        Property property = persistentClass.getProperty(propertyName);
+        assertThat(property).isNotNull();
+        return (Column) property.getColumnIterator().next();
+    }
+
+    public static List<String> getComponentColumnNames(PersistentClass persistentClass,
+            String componentPropertyName) {
+
+        Property componentBinding = persistentClass.getProperty(componentPropertyName);
         assertThat(componentBinding).isNotNull();
 
         Component component = (Component) componentBinding.getValue();
         return getColumNames(component.getColumnIterator());
     }
 
-    public static List<String> getColumNames(Iterator<?> columnIterator) {
+    public static List<String> getColumNames(Table table) {
+        return getColumNames(table.getColumnIterator());
+    }
+
+    private static List<String> getColumNames(Iterator<?> columnIterator) {
         ArrayList<String> result = InternalUtils.CollectionUtils.newArrayList();
 
         while (columnIterator.hasNext()) {
@@ -69,10 +104,21 @@ public final class StrategyTestUtils {
         ArrayList<String> result = InternalUtils.CollectionUtils.newArrayList();
 
         Iterator<UniqueKey> iterator = table.getUniqueKeyIterator();
-
         while (iterator.hasNext()) {
             UniqueKey uniqueKey = iterator.next();
             result.add(uniqueKey.getName());
+        }
+
+        return result;
+    }
+
+    public static List<String> getIndexNames(Table table) {
+        ArrayList<String> result = InternalUtils.CollectionUtils.newArrayList();
+
+        Iterator<Index> indexIterator = table.getIndexIterator();
+        while (indexIterator.hasNext()) {
+            Index index = indexIterator.next();
+            result.add(index.getName());
         }
 
         return result;
@@ -97,8 +143,12 @@ public final class StrategyTestUtils {
 
     public static void logSchemaUpdate(ServiceRegistry serviceRegistry,
             ImplicitNamingStrategy strategy, Class<?>... annotatedClasses) {
+        logSchemaUpdate(createMetadata(serviceRegistry, strategy, annotatedClasses));
+    }
+
+    public static void logSchemaUpdate(Metadata metadata) {
         new SchemaUpdate().setDelimiter(";").setFormat(true).execute(EnumSet.of(TargetType.STDOUT),
-                createMetadata(serviceRegistry, strategy, annotatedClasses));
+                metadata);
     }
 
 }
