@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'maven'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -15,7 +16,7 @@ dependencies {
 
     //compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.6.Final'
 
-    compile('com.github.v-ladynev:fluent-hibernate-core:0.3.0') {
+    compile('com.github.v-ladynev:fluent-hibernate-core:0.3.1') {
         exclude group: 'org.hibernate'
     }
 
