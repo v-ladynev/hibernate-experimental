@@ -45,21 +45,21 @@ public class PosperNamingStrategy extends ImplicitNamingStrategyLegacyJpaImpl {
 /*
 
 @Entity
-public class Author {
+public class Car {
 
     @Id
     private Integer pid;
 
     @ManyToMany
-    private List<Book> coauthorBooks;
+    private List<Reservation> coauthorBooks;
 
     @OneToMany
-    private List<Book> ownBooks;
+    private List<Reservation> ownBooks;
 
 }
 
 @Entity
-public class Book {
+public class Reservation {
 
     @Id
     private Integer pid;

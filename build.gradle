@@ -12,10 +12,10 @@ repositories {
 }
 
 dependencies {
-    compile 'org.hibernate:hibernate-core:5.1.0.Final'
-
+    compile 'org.hibernate:hibernate-core:5.2.10.Final'
     //compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.6.Final'
 
+    compile 'com.google.guava:guava:21.0'
     compile('com.github.v-ladynev:fluent-hibernate-core:0.3.1') {
         exclude group: 'org.hibernate'
     }
