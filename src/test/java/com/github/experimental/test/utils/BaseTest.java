@@ -10,7 +10,7 @@ public class BaseTest {
         Fluent.factory().dontUseHibernateCfgXml()
                 .hibernateProperties(
                         HibernateProperties.forH2CreateDrop().showSql(true).formatSql(true))
-                /*.useNamingStrategy()*/.scanPackages(packageName)
+                .useNamingStrategy().scanPackages(packageName)
                 .build();
     }
 
