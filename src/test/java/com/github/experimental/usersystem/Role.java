@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * A role.
+ * Bank role.
  *
  * @author V.Ladynev
  */

@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
- * A user.
+ * Bank user.
  *
  * @author V.Ladynev
  */

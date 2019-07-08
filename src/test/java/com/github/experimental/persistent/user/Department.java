@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * A department.
+ * Bank department.
  *
  * @author V.Ladynev
  */

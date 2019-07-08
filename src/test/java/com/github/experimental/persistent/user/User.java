@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * A user.
+ * Bank user.
  *
  * @author V.Ladynev
  */

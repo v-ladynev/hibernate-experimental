@@ -45,7 +45,7 @@ public class PosperNamingStrategy extends ImplicitNamingStrategyLegacyJpaImpl {
 /*
 
 @Entity
-public class Car {
+public class Category {
 
     @Id
     private Integer pid;

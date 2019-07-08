@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.hibernate:hibernate-core:5.2.10.Final'
+    compile 'org.hibernate:hibernate-core:5.1.17.Final'
     //compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.6.Final'
 
     compile 'com.google.guava:guava:21.0'

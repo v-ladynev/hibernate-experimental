@@ -25,7 +25,7 @@ public class OneToManyTest extends BaseTest {
         System.out.println(H.save(new Car()).getPid());
 
         List<Car> result = H.<Car>request(
-                "select c from Car c where not exists (select r.pid from Reservation r where r.car.pid = c.pid)"
+                "select c from Category c where not exists (select r.pid from Reservation r where r.car.pid = c.pid)"
         ).list();
 
         System.out.println(result);

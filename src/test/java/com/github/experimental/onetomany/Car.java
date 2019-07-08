@@ -17,7 +17,8 @@ public class Car {
     @GeneratedValue
     private Integer pid;
 
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    //@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Reservation> reservations = Lists.newArrayList();
 
     public Car() {
@@ -47,7 +48,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car: " + pid;
+        return "Category: " + pid;
     }
 
 }

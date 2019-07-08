@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * A system.
+ * Bank system.
  *
  * @author V.Ladynev
  */
