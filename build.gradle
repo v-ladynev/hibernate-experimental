@@ -20,6 +20,8 @@ dependencies {
         exclude group: 'org.hibernate'
     }
 
+    compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
+
     compile files('libs/ojdbc6_11.2.0.4.jar')
 
     testCompile 'junit:junit:4.12'

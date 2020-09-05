@@ -1,8 +1,10 @@
 package com.github.experimental.manytomany;
 
 import com.github.experimental.test.utils.BaseTest;
+import com.github.experimental.utils.HibernateUtils;
 import com.github.fluent.hibernate.H;
 import com.google.common.collect.Sets;
+import org.hibernate.Query;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -28,6 +30,13 @@ public class ManyToManyTest extends BaseTest {
 
         List<Class> result = H.<Class>request("select c from Class c").list();
         System.out.println(result);
+
+        Integer count = H.request(session -> {
+            Query query = session.createQuery("select count(*) from Class c");
+            return HibernateUtils.count(query);
+        });
+
+        System.out.println(count);
     }
 
 }
